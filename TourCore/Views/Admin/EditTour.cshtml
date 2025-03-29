@@ -1,0 +1,60 @@
+﻿@model TourCore.Models.ViewModels.TourViewModel
+
+@{
+    ViewData["Title"] = "EditTour";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 style="text-align:center;color:brown">Chỉnh sửa tour du lịch @Model.NameTour</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("EditTour", "Admin", FormMethod.Post))
+        {
+            <input type="hidden" name="@Model.Id"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label name="Code" class="control-label" >Mã Tour</label>
+                <input name="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Day" class="control-label">Ngày</label>
+                <input name="Day" class="form-control" />
+                <span asp-validation-for="Day" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Night" class="control-label">Đêm</label>
+                <input name="Night" class="form-control" />
+                <span asp-validation-for="Night" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Cost" class="control-label">Giá Tiền</label>
+                <input name="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Discount" class="control-label">Giảm giá</label>
+                <input name="Discount" class="form-control" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label name="Quantity" class="control-label">Số Lượng</label>
+                <input name="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Description" class="control-label">Mô tả chi tiết</label>
+                <input name="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>
+
+
+

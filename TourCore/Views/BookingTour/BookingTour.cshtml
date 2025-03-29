@@ -1,0 +1,87 @@
+﻿@model TourCore.Models.ViewModels.TourViewModel
+
+<!-- Thêm thông báo thành công ở đầu form -->
+<div id="thongBaoThanhCong" style="display:none; color: green; margin-top: 20px;">
+    Bạn đã đặt tour thành công! Bạn sẽ được chuyển đến trang chủ sau vài giây.
+</div>
+
+<!-- Loại bỏ Html.BeginForm và thay bằng form tĩnh với action trực tiếp -->
+<form action="/" method="get" class="row" onsubmit="return validateForm(event)">
+    <div class="col-sm-6 form-group contact-forms">
+        @Html.TextBox("HoVaTen", "", new { @class = "form-control", @placeholder = "Họ Và Tên", id = "HoVaTen" })
+        <span id="errorHoVaTen" style="color:red; display:none;">Vui lòng nhập Họ Và Tên</span>
+        @Html.ValidationMessage("HoVaTen", "", new { @style = "color:red;" })
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        @Html.TextBox("Email", "", new { @class = "form-control", @placeholder = "Email", id = "Email" })
+        <span id="errorEmail" style="color:red; display:none;">Vui lòng nhập Email</span>
+        @Html.ValidationMessage("Email", "", new { @style = "color:red;" })
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        @Html.TextBox("SoDienThoai", "", new { @class = "form-control", @placeholder = "Số Điện Thoại", id = "SoDienThoai" })
+        <span id="errorSoDienThoai" style="color:red; display:none;">Vui lòng nhập Số Điện Thoại</span>
+        @Html.ValidationMessage("SoDienThoai", "", new { @style = "color:red;" })
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        @Html.TextBox("DiaChi", "", new { @class = "form-control", @placeholder = "Địa Chỉ", id = "DiaChi" })
+        <span id="errorDiaChi" style="color:red; display:none;">Vui lòng nhập Địa Chỉ</span>
+        @Html.ValidationMessage("DiaChi", "", new { @style = "color:red;" })
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        @Html.TextBox("SoNguoi", "", new { @class = "form-control", @placeholder = "Số Người", id = "SoNguoi" })
+        <span id="errorSoNguoi" style="color:red; display:none;">Vui lòng nhập Số Người</span>
+        @Html.ValidationMessage("SoNguoi", "", new { @style = "color:red;" })
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        <input type="text" name="Content" class="form-control" placeholder="Gửi yêu cầu" id="Content" />
+        <span id="errorContent" style="color:red; display:none;">Vui lòng nhập yêu cầu</span>
+    </div>
+    <div class="col-sm-6 form-group contact-forms">
+        <input type="date" name="BeginDate" class="form-control" placeholder="Ngày khách muốn đi" id="BeginDate" />
+        <span id="errorBeginDate" style="color:red; display:none;">Vui lòng chọn ngày</span>
+    </div>
+    <input type="hidden" name="TourId" value="@Model.Id" />
+    <div class="col-md-12 booking-button">
+        <button type="submit" class="btn btn-block sent-butnn" id="btnSubmit">Đặt Tour</button>
+    </div>
+</form>
+
+<script>
+    function validateForm(event) {
+        event.preventDefault(); // Ngăn chặn hành động submit mặc định của form
+        var isValid = true;
+        var fields = [
+            { id: "HoVaTen", errorId: "errorHoVaTen" },
+            { id: "Email", errorId: "errorEmail" },
+            { id: "SoDienThoai", errorId: "errorSoDienThoai" },
+            { id: "DiaChi", errorId: "errorDiaChi" },
+            { id: "SoNguoi", errorId: "errorSoNguoi" },
+            { id: "Content", errorId: "errorContent" },
+            { id: "BeginDate", errorId: "errorBeginDate" }
+        ];
+
+        fields.forEach(function (field) {
+            var element = document.getElementById(field.id);
+            var errorElement = document.getElementById(field.errorId);
+            if (!element.value) {
+                isValid = false;
+                element.style.borderColor = "red";
+                errorElement.style.display = "block";
+            } else {
+                element.style.borderColor = "";
+                errorElement.style.display = "none";
+            }
+        });
+
+        if (isValid) {
+            document.getElementById('thongBaoThanhCong').style.display = 'block';
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 5000);
+        } else {
+            document.getElementById('thongBaoThanhCong').style.display = 'none';
+        }
+
+        return isValid;
+    }
+</script>

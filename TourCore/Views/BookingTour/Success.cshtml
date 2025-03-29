@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Đặt tour thành công";
+}
+
+<h2>Đặt tour thành công!</h2>
+<p>Chúng tôi sẽ liên hệ lại với bạn để xác nhận thông tin</p>
+<p>Bạn sẽ được chuyển về trang chủ sau vài giây...</p>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '@Url.Action("Index", "Home")';
+    }, 3000); // Chuyển về trang chủ sau 3 giây
+</script>

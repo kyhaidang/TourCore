@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TourCore.Models.ViewModels.ContractDetailViewModel>
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    tbody > tr > td {
+        text-align: center;
+    }
+
+    thead > tr > th {
+        text-align: center;
+    }
+</style>
+<h1 style="text-align:center;color:brown">Danh sách khánh hàng đã thanh toán</h1>
+
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameTour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameCustomer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Id)
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameTour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCustomer)
+                </td>
+                <td>
+                    @item.Cost.Value.ToString("#,##") VNĐ
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

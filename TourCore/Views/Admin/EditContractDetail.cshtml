@@ -1,0 +1,56 @@
+﻿@model TourCore.Models.ViewModels.ContractDetailViewModel
+@{
+    ViewData["Title"] = "EditContractDetail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    h2 {
+        color: firebrick;
+    }
+    select{
+        font-size:20px;
+        padding:10px;
+        color:firebrick;
+    }
+    input[type=submit]
+    {
+        font-size:20px;
+        padding:10px;
+        color:forestgreen;
+        margin-left:10px;
+    }
+</style>
+<h1 style="text-align:center;color:brown">Thanh toán Tour @Model.NameTour</h1>
+<br />
+<div>
+    <img src="@Url.Content("/images/tour_images/" + Model.Picture)" style="width:200px;height:200px;" />
+</div>
+<br />
+<div>
+    <h2>Khách hàng : @Model.NameCustomer</h2>
+</div>
+<div>
+    <h2>Giá tiền : @Model.Cost.Value.ToString("#,##") VNĐ</h2>
+</div>
+<div>
+    <h2>Tình trạng thanh toán: @Model.Paid</h2>
+</div>
+<div>
+    <h2>Số người đi : @Model.PeopleGo</h2>
+</div>
+<br />
+<br />
+@using (Html.BeginForm("EditContractDetail", "Admin", FormMethod.Post))
+{
+    <input type="hidden" name="Id" value="@Model.Id"/>
+        <select name="Paid">
+            <option value="false">Chưa thanh toán</option>
+            <option value="true">Thanh toán rồi</option>
+        </select>
+        <input type="submit" />
+}
+
+
+
+
+
